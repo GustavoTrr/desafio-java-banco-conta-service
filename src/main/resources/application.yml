@@ -1,0 +1,21 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: contaservice
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    propeties:
+      hibernate:
+      dialect: org.hiernate.dialect.MySQL8Dialect
+  jmx:
+    enable: false
+  datasource: 
+    url: jdbc:mysql://localhost:3306/desafiosouth_contaservice?allowPublicKeyRetrieval=true&sslMode=DISABLED&useSSL=false&serverTimezone=UTC
+    username: southsysuser
+    password:
