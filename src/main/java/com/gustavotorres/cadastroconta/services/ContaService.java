@@ -71,6 +71,7 @@ public class ContaService {
     private String getNumeroNovaConta() {
 
         Long maxId = contaRepository.getMaxId();
+        maxId = maxId == null ? 0 : maxId;
         if (maxId > 999999) {
             throw new LimiteDeContasException("Chegamos ao limite de número de conta de 6 dígitos!");
         }

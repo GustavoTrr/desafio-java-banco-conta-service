@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ParametroFaixaScoreELimiteRepository extends JpaRepository<ParametroFaixaScoreELimite, Long> {
     
-    public BigInteger findLimiteCartaoEmCentavosByScore(Short score);
-    public BigInteger findLimiteChequeEspecialEmCentavosByScore(Short score);
+    public ParametroFaixaScoreELimite findLimiteCartaoEmCentavosByScore(Short score);
+    public ParametroFaixaScoreELimite findLimiteChequeEspecialEmCentavosByScore(Short score);
 }

@@ -17,19 +17,25 @@ public class ChequeEspecialService {
     @Autowired
     private ChequeEspecialRepository chequeEspecialRepository;
 
+    @Autowired
+    private ParametroFaixaScoreELimiteService parametroFaixaScoreELimiteService;
+
     private ChequeEspecial save(ChequeEspecial chequeEspecial) {
         return chequeEspecialRepository.save(chequeEspecial);
     }
 
     private BigInteger defineLimite(Short score) {
-        return BigInteger.valueOf(123L);
+        return parametroFaixaScoreELimiteService.getLimiteChequeEspecialPorScore(score);
     }
 
     public ChequeEspecialDTO criarParaConta(ContaDTO contaDTO, Short score) {
         
-        ChequeEspecial chequeEspecial = new ChequeEspecial();
-        chequeEspecial.setConta(Conta.create(contaDTO));
-        chequeEspecial.setLimiteEmCentavos(defineLimite(score));
+        var limite = defineLimite(score);
+        
+        ChequeEspecial chequeEspecial = ChequeEspecial.builder()
+            .conta(Conta.create(contaDTO))
+            .limiteEmCentavos(limite)
+            .build();
         
         return ChequeEspecialDTO.create(save(chequeEspecial));
     }

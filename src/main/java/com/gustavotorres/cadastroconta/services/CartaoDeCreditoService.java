@@ -17,19 +17,29 @@ public class CartaoDeCreditoService {
     @Autowired
     private CartaoDeCreditoRepository cartaoDeCreditoRepository;
 
+    @Autowired
+    private ParametroFaixaScoreELimiteService parametroFaixaScoreELimiteService;
+
     private CartaoDeCredito save(CartaoDeCredito cartaoDeCredito) {
         return cartaoDeCreditoRepository.save(cartaoDeCredito);
     }
 
     private BigInteger defineLimite(Short score) {
-        return BigInteger.valueOf(123L);
+        return parametroFaixaScoreELimiteService.getLimiteCartaoPorScore(score);
     }
 
     public CartaoDeCreditoDTO criarParaConta(ContaDTO contaDTO, Short score) {
 
-        CartaoDeCredito cartaoDeCredito = new CartaoDeCredito();
-        cartaoDeCredito.setConta(Conta.create(contaDTO));
-        cartaoDeCredito.setLimiteEmCentavos(defineLimite(score));
+        var limite = defineLimite(score);
+
+        if (limite.equals(BigInteger.ZERO)) {
+            return null;
+        }
+
+        CartaoDeCredito cartaoDeCredito = CartaoDeCredito.builder()
+            .conta(Conta.create(contaDTO))
+            .limiteEmCentavos(limite)
+            .build();
         
         return CartaoDeCreditoDTO.create(save(cartaoDeCredito));
     }

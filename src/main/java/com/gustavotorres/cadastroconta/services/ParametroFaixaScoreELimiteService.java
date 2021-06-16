@@ -15,10 +15,10 @@ public class ParametroFaixaScoreELimiteService {
     ParametroFaixaScoreELimiteRepository parametroFaixaScoreELimiteRepository;
     
     public BigInteger getLimiteCartaoPorScore(Short score) {
-        return parametroFaixaScoreELimiteRepository.findLimiteCartaoEmCentavosByScore(score);
+        return parametroFaixaScoreELimiteRepository.findLimiteCartaoEmCentavosByScore(score).getLimiteCartaoEmCentavos();
     }
 
     public BigInteger getLimiteChequeEspecialPorScore(Short score) {
-        return parametroFaixaScoreELimiteRepository.findLimiteChequeEspecialEmCentavosByScore(score);
+        return parametroFaixaScoreELimiteRepository.findLimiteChequeEspecialEmCentavosByScore(score).getLimiteChequeEspecialEmCentavos();
     }
 }
