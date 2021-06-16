@@ -14,11 +14,13 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.gustavotorres.cadastroconta.dtos.PessoaCadastroInputDTO;
 import com.gustavotorres.cadastroconta.dtos.PessoaDTO;
 
 import org.modelmapper.ModelMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,6 +29,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "pessoas")
+@Builder
 public class Pessoa {
     
     @Id
@@ -43,5 +46,11 @@ public class Pessoa {
 
     public static Pessoa create(PessoaDTO pessoaDTO) {
         return new ModelMapper().map(pessoaDTO, Pessoa.class);
+    }
+
+    public static Pessoa create(PessoaCadastroInputDTO pessoaCadastroDTO) {
+        return Pessoa.builder()
+            .idPublico(pessoaCadastroDTO.getIdPublico())
+            .build();
     }
 }

@@ -19,3 +19,7 @@ spring:
     url: jdbc:mysql://localhost:3306/desafiosouth_contaservice?allowPublicKeyRetrieval=true&sslMode=DISABLED&useSSL=false&serverTimezone=UTC
     username: southsysuser
     password:
+
+constants:
+  conta:
+    agencia: 12345

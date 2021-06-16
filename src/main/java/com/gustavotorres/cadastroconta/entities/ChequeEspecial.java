@@ -29,6 +29,7 @@ import com.gustavotorres.cadastroconta.enums.TipoPessoa;
 import org.modelmapper.ModelMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -37,6 +38,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "cheques_especiais")
+@Builder
 public class ChequeEspecial {
     
     @Id

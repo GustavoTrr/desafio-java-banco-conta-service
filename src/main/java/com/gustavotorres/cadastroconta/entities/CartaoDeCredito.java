@@ -28,6 +28,7 @@ import com.gustavotorres.cadastroconta.enums.TipoPessoa;
 import org.modelmapper.ModelMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -36,6 +37,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "cartoes_de_credito")
+@Builder
 public class CartaoDeCredito {
     
     @Id
