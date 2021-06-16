@@ -1,6 +1,7 @@
 package com.gustavotorres.cadastroconta.controllers;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import com.gustavotorres.cadastroconta.dtos.ContaDTO;
 import com.gustavotorres.cadastroconta.dtos.PessoaCadastroInputDTO;
@@ -57,9 +58,21 @@ public class ContaController {
 
             Page<ContaDTO> pagedListContaDTO = contaService.findAll(pageable);
 
+            pagedListContaDTO.stream().forEach(p -> {p.add(linkTo(methodOn(ContaController.class).findById(p.getId())).withSelfRel());});
+
             PagedModel<EntityModel<ContaDTO>> pagedModel = assembler.toModel(pagedListContaDTO);
 
+
             return new ResponseEntity<>(pagedModel,HttpStatus.OK);
+
+    }
+
+    @GetMapping(value = "/{id}",
+                produces = {"application/json","application/xml","application/x-yaml"})
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+            ContaDTO contaDTO = contaService.findById(id);
+            contaDTO.add(linkTo(methodOn(ContaController.class).findById(contaDTO.getId())).withSelfRel());
+            return new ResponseEntity<>(contaDTO,HttpStatus.OK);
 
     }
 
@@ -67,6 +80,7 @@ public class ContaController {
                 consumes = {"application/json","application/xml","application/x-yaml"})
     public ResponseEntity<?> criarConta(@Valid @RequestBody PessoaCadastroInputDTO pessoaCadastroInputDTO) {
         ContaDTO contaDTORetorno = contaService.criarConta(pessoaCadastroInputDTO);
+        contaDTORetorno.add(linkTo(methodOn(ContaController.class).findById(contaDTORetorno.getId())).withSelfRel());
 
         return new ResponseEntity<>(contaDTORetorno,HttpStatus.CREATED);
     }

@@ -15,6 +15,7 @@ import com.gustavotorres.cadastroconta.dtos.PessoaDTO;
 import com.gustavotorres.cadastroconta.entities.Conta;
 import com.gustavotorres.cadastroconta.enums.TipoConta;
 import com.gustavotorres.cadastroconta.exceptions.LimiteDeContasException;
+import com.gustavotorres.cadastroconta.exceptions.ResourceNotFoundException;
 import com.gustavotorres.cadastroconta.repositories.ContaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,6 +112,17 @@ public class ContaService {
     public Page<ContaDTO> findAll(Pageable pageable) {
         var page = contaRepository.findAll(pageable);
         return page.map(ContaDTO::create);
+    }
+
+    public Conta findOrFail(Long id) {
+        var conta = contaRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Conta de id = " + id + " não encontrada."));
+
+        return  conta;
+    }
+
+    public ContaDTO findById(Long id) {
+        return ContaDTO.create(findOrFail(id));
     }
 
     
