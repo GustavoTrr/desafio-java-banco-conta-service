@@ -10,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.RepresentationModel;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Builder
 public class ContaDTO extends RepresentationModel<ContaDTO> implements Serializable {
     
     private Long id;
@@ -38,18 +36,9 @@ public class ContaDTO extends RepresentationModel<ContaDTO> implements Serializa
 
     private ChequeEspecialDTO chequeEspecial;
 
-    private List<CartaoDeCreditoDTO> cartaoDeCredito;
+    private List<CartaoDeCreditoDTO> cartoes;
 
     public static ContaDTO create(Conta conta) {
-        return ContaDTO.builder()
-            .agencia(conta.getAgencia())
-            .cartaoDeCredito(conta.getCartoes().stream().map(CartaoDeCreditoDTO::create).toList())
-            .chequeEspecial(ChequeEspecialDTO.create(conta.getChequeEspecial()))
-            .pessoa(PessoaDTO.create(conta.getPessoa()))
-            .numeroConta(conta.getNumeroConta())
-            .tipoConta(conta.getTipoConta())
-            .id(conta.getId())
-            .build();
-            
+        return new ModelMapper().map(conta, ContaDTO.class);
     }
 }
