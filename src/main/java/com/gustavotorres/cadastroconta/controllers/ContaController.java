@@ -42,12 +42,24 @@ public class ContaController {
     @Autowired
     private ContaService contaService;
 
+    @Autowired
+    private PagedResourcesAssembler<ContaDTO> assembler;
+
     @GetMapping(produces = {"application/json","application/xml","application/x-yaml"})
-        public ResponseEntity<?> findAll() {
+        public ResponseEntity<?> findAll(@RequestParam(value = "page", defaultValue = "0") int page,    
+        @RequestParam(value = "size", defaultValue = "12") int size,    
+        @RequestParam(value = "sort", defaultValue = "asc") String sort
+    ) {
 
-            List<ContaDTO> listOfContas = contaService.findAll();
+            var sortDirection = "desc".equalsIgnoreCase(sort) ? Direction.DESC : Direction.ASC;
 
-            return new ResponseEntity<>(listOfContas,HttpStatus.OK);
+            Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection,"numeroConta"));
+
+            Page<ContaDTO> pagedListContaDTO = contaService.findAll(pageable);
+
+            PagedModel<EntityModel<ContaDTO>> pagedModel = assembler.toModel(pagedListContaDTO);
+
+            return new ResponseEntity<>(pagedModel,HttpStatus.OK);
 
     }
 

@@ -19,6 +19,8 @@ import com.gustavotorres.cadastroconta.repositories.ContaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -104,6 +106,11 @@ public class ContaService {
 
     public List<ContaDTO> findAll() {
         return contaRepository.findAll().stream().map(ContaDTO::create).collect(Collectors.toList());
+    }
+
+    public Page<ContaDTO> findAll(Pageable pageable) {
+        var page = contaRepository.findAll(pageable);
+        return page.map(ContaDTO::create);
     }
 
     
