@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 
-import com.gustavotorres.cadastroconta.LimiteDeContasException;
 import com.gustavotorres.cadastroconta.dtos.CartaoDeCreditoDTO;
 import com.gustavotorres.cadastroconta.dtos.ChequeEspecialDTO;
 import com.gustavotorres.cadastroconta.dtos.ContaDTO;
@@ -15,6 +14,7 @@ import com.gustavotorres.cadastroconta.dtos.PessoaCadastroInputDTO;
 import com.gustavotorres.cadastroconta.dtos.PessoaDTO;
 import com.gustavotorres.cadastroconta.entities.Conta;
 import com.gustavotorres.cadastroconta.enums.TipoConta;
+import com.gustavotorres.cadastroconta.exceptions.LimiteDeContasException;
 import com.gustavotorres.cadastroconta.repositories.ContaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
