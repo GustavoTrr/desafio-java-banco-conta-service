@@ -36,7 +36,7 @@ public class ContaDTO extends RepresentationModel<ContaDTO> implements Serializa
 
     private ChequeEspecialDTO chequeEspecial;
 
-    private List<CartaoDeCreditoDTO> cartaoDeCredito;
+    private List<CartaoDeCreditoDTO> cartoes;
 
     public static ContaDTO create(Conta conta) {
         return new ModelMapper().map(conta, ContaDTO.class);
