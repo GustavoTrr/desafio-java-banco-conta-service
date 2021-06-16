@@ -50,7 +50,7 @@ public class ContaService {
         ChequeEspecialDTO chequeEspecial = chequeEspecialService.criarParaConta(contaDTOCriada, pessoaCadastroDTO.getScore());
 
 
-        contaDTOCriada.setCartaoDeCredito(Arrays.asList(cartaoDeCredito));
+        contaDTOCriada.setCartoes(Arrays.asList(cartaoDeCredito));
         contaDTOCriada.setChequeEspecial(chequeEspecial);
 
         return contaDTOCriada;
