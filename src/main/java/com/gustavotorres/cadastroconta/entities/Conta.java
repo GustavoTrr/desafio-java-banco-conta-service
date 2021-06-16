@@ -46,7 +46,7 @@ public class Conta {
     private Long id;
 
     @Column(name = "numero_conta", unique = true)
-    private Short numeroConta;
+    private String numeroConta;
 
     @Column(name = "agencia")
     private String agencia;

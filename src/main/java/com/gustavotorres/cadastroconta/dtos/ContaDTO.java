@@ -26,7 +26,7 @@ public class ContaDTO extends RepresentationModel<ContaDTO> implements Serializa
     
     private Long id;
 
-    private Short numeroConta;
+    private String numeroConta;
 
     private String agencia;
 
