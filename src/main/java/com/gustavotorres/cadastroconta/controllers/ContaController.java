@@ -46,6 +46,7 @@ public class ContaController {
     @Autowired
     private PagedResourcesAssembler<ContaDTO> assembler;
 
+    @ApiOperation("Buscar Lista de Contas")
     @GetMapping(produces = {"application/json","application/xml","application/x-yaml"})
         public ResponseEntity<?> findAll(@RequestParam(value = "page", defaultValue = "0") int page,    
         @RequestParam(value = "size", defaultValue = "12") int size,    
@@ -69,6 +70,7 @@ public class ContaController {
 
     @GetMapping(value = "/{id}",
                 produces = {"application/json","application/xml","application/x-yaml"})
+    @ApiOperation("Buscar Conta pelo Id")
     public ResponseEntity<?> findById(@PathVariable Long id) {
             ContaDTO contaDTO = contaService.findById(id);
             contaDTO.add(linkTo(methodOn(ContaController.class).findById(contaDTO.getId())).withSelfRel());
@@ -78,6 +80,7 @@ public class ContaController {
 
     @PostMapping(produces = {"application/json","application/xml","application/x-yaml"},
                 consumes = {"application/json","application/xml","application/x-yaml"})
+    @ApiOperation("Cadastrar nova Conta para Pessoa")
     public ResponseEntity<?> criarConta(@Valid @RequestBody PessoaCadastroInputDTO pessoaCadastroInputDTO) {
         ContaDTO contaDTORetorno = contaService.criarConta(pessoaCadastroInputDTO);
         contaDTORetorno.add(linkTo(methodOn(ContaController.class).findById(contaDTORetorno.getId())).withSelfRel());
