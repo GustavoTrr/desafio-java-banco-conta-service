@@ -2,7 +2,6 @@ package com.gustavotorres.cadastroconta.services;
 
 import java.math.BigInteger;
 
-import com.gustavotorres.cadastroconta.enums.Score;
 import com.gustavotorres.cadastroconta.repositories.ParametroFaixaScoreELimiteRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

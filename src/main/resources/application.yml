@@ -20,6 +20,17 @@ spring:
     username: southsysuser
     password:
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+
 constants:
   conta:
     agencia: 12345
+  rabbitmq:
+    exchange:  gtorresbank.exchange
+    queue: gtorresbank.conta.queue
+
+  
