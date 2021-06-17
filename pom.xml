@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.gustavotorres</groupId>
 	<artifactId>cadastroconta</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>cadastroconta</name>
 	<description>Microsserviço de cadastro de contas bancárias para o desafio rh-southsystem/desafio-java-banco</description>
 	<properties>
